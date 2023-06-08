@@ -1,0 +1,26 @@
+** 1. What is Node.js?
+----------------------
+
+* Node.js history
+-----------------
+	- 2009 Node.js Created --> Ryan Doll --> JavasCript Runtime based on Chrome's VA Engine.
+	- 2011  npm Created --> Allowed for the sharing of open source Node libraries.
+	- 2015 Node.js Foundation.
+
+==================================================================================================================================================================
+
+* Installing Node.js
+--------------------
+	- nodejs.org
+
+	- node -v
+
+	- npmp -v
+
+==================================================================================================================================================================
+
+* Using Visual Studio Code
+--------------------------
+	- The code will be edited in this IDE.
+
+	

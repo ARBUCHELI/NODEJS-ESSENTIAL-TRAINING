@@ -1,0 +1,18 @@
+** Introduction
+---------------
+
+* Learning the Node.js basics
+-----------------------------
+	Node can be used for:
+		. Building command line tools.
+		. Creating servers.
+		. Interacting with the file system.
+		
+		. USED IN THE INDUSTRY TO BUILD SCALABLE EVENT-DRIVEN APPLICATIONS.
+==================================================================================================================================================================
+
+* What you should know
+----------------------
+	- JavaScript
+	- ES6 Syntax
+	
