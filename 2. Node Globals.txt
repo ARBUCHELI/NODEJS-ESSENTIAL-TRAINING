@@ -1,0 +1,8 @@
+** 2. Node Globals
+------------------
+
+* Inspecting the global object
+------------------------------
+	- In the browser the global object is called the Window, but in Node.js, the global object is called global
+
+	- Functions, methods, classes that are scoped to the global namespace we don't need to import them. We can access them at any time.
