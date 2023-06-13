@@ -6,3 +6,46 @@
 	- In the browser the global object is called the Window, but in Node.js, the global object is called global
 
 	- Functions, methods, classes that are scoped to the global namespace we don't need to import them. We can access them at any time.
+
+	- If we type console.log("Hello World"); and global.console.log("Hello World"); the result is the same, and this probes that console.log belongs to the global object.
+
+	- To run a program called global.js, you can type node global, and node.js will assume that is a JavaScript file.
+
+	- Every new file that we create, will have its own scope, for that reason the following program won't work as expected and, the output will be undefined.
+
+		let hello = "Hello World from Node.js";
+		console.log(global.hello);
+
+	- The solution is to write like this:
+	
+		console.log(hello);
+
+===================================================================================================================================================================
+
+* Using the require function
+----------------------------
+	- We also have globally available to use in Node.js:
+		. referrences to the current file.
+		. referrences to the current directory.
+
+			console.log(__dirname);
+			console.log(__filename);
+
+	- Another globally available is the common.js module pattern. This is the pattern we are going to use to import other code into our files.
+
+	- This is one way to import modules:
+		
+		const path = require("path");
+
+	- With the following lines of code you can explore the options that you have in global:
+	
+		for (let key in global) {
+    			console.log(key);
+		}
+
+	
+
+
+	
+		
+	
