@@ -43,7 +43,115 @@
     			console.log(key);
 		}
 
-	
+Output:
+-------
+global
+clearInterval
+clearTimeout
+setInterval
+setTimeout
+queueMicrotask
+clearImmediate
+setImmediate
+
+==================================================================================================================================================================
+
+* Handling argument variables with process.argv
+-----------------------------------------------
+	- One important object that is available to us globally is the process object.
+		. Environment information.
+		. Read environment variables.
+		. Communicate with the terminal.
+
+	- It gives as us way to work with that current process instance.
+
+	- One of the things we can do with this object is collecting information from the terminal:
+		. This information is stored in the process.argv array.
+
+		console.log(process.argv);
+
+Output
+------
+[
+  'C:\\Program Files\\nodejs\\node.exe',
+  'C:\\Users\\Andres R. Bucheli\\Desktop\\SOFTWARE ENGINEER\\LINKEDIN LEARNING\\BECOME A FULL STACK WEB DEVELOPER\\NODEJS ESSENTIAL TRAINING\\process.js'
+]
+
+	- We also can pass information from the terminal:
+		
+		node process --user Andres --greeting "hello from node"
+
+	- The output will be a larger array:
+
+Output:
+-------
+[
+  'C:\\Program Files\\nodejs\\node.exe',
+  'C:\\Users\\Andres R. Bucheli\\Desktop\\SOFTWARE ENGINEER\\LINKEDIN LEARNING\\BECOME A FULL STACK WEB DEVELOPER\\NODEJS ESSENTIAL TRAINING\\process',
+  '--user',
+  'Andres',
+  '--greeting',
+  'hello from node'
+]
+
+	- All the typed values will be added to the array.
+
+	- For example if we went to get the values after the flags denoted by "--" we can create the following code:
+
+		function grab(flag) {
+			let indexAfterFlag = process.argv.indexOf(flag) + 1;
+			return process.argv[indexAfterFlag];
+		}
+
+		let greeting = grab("--greeting');
+		let user = grab("--user");
+
+		console.log(greeting);
+		console.log(user);
+
+	- With this code we are going to be able to isolate the greeting and the user, and this is a good example.
+
+Output
+------
+$ node process --user Andres --greeting "hello from node"
+hello from node
+Andres
+
+	- So using the process.argv array,  we are going to be able to collect user input, we can create all sorts of cool command line applications with node just by understanding this 
+	array.
+
+==================================================================================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	
