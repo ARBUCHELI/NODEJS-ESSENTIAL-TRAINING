@@ -122,6 +122,42 @@ Andres
 
 ==================================================================================================================================================================
 
+* Working with standard input
+-----------------------------
+	standard input and standard output offer us to communicate with a process while it's running.
+
+standard-input-standard-output.js
+---------------------------------
+process.stdout.write("Hello \n \n");
+
+const questions = [
+    "What is your name?",
+    "What would you rather be doing?",
+    "What is your preferred programming language"
+];
+
+const answers = [];
+
+function ask(i) {
+    process.stdout.write(`\n\n\n ${questions[i]}`);
+    process.stdout.write(` > `);
+}
+
+//ask(answers.length); -----> Until here running the app is going to ask the first question, it prompts the user for an answer and then it quits.
+
+	What we need to do is to wait until the user answer the question.  So what we can do is to listen for a data event o this object, using a function.
+
+process.stdin.on("data", function(data) {
+    process.stdout.write(data.toString().trim());
+})
+
+ask(answers.length);
+
+	At this point, the program is just copying everything that we do in the terminal. By adding the listener, we start using node asynchronously, so every other app we've run 
+	until now has run through the command synchronously and quit, leaving us back at the terminal prompt, but this time, the app is still running, is waiting for some kind of input, 
+	and that's something we need to solve.
+
+==================================================================================================================================================================
 
 
 
