@@ -148,26 +148,92 @@ function ask(i) {
 	What we need to do is to wait until the user answer the question.  So what we can do is to listen for a data event o this object, using a function.
 
 process.stdin.on("data", function(data) {
-    process.stdout.write(data.toString().trim());
+    process.stdout.write(data.toString().trim()); -----> This is the line that was echoing the answer back.
 })
 
 ask(answers.length);
 
 	At this point, the program is just copying everything that we do in the terminal. By adding the listener, we start using node asynchronously, so every other app we've run 
 	until now has run through the command synchronously and quit, leaving us back at the terminal prompt, but this time, the app is still running, is waiting for some kind of input, 
-	and that's something we need to solve.
+	and that's something we need to solve, how to stop the process when we are out of data, and we are out of these prompts.
 
 ==================================================================================================================================================================
 
+* Using standard output
+-----------------------
+	We need to change the code to collect answers.
+	
+	On this point we are collecting the answers but we are not doing anything with them yet.  
 
+using-standard-output.js
+------------------------
+process.stdout.write("Hello \n \n");
 
+const questions = [
+    "What is your name?",
+    "What would you rather be doing?",
+    "What is your preferred programming language"
+];
 
+const answers = [];
 
+//We can add a default argument to this function, and delete it from ask(answer.length);
+function ask(i = 0) {
+    process.stdout.write(`\n\n\n ${questions[i]}`);
+    process.stdout.write(` > `);
+}
 
+ask();
 
+process.stdin.on("data", function(data) {
+    answers.push(data.toString().trim());
+    if (answers.length < questions.length) {
+        ask(answers.length);
+    } else {
+        process.exit();
+    }
+})
 
+	Now we need to do something to display the results:
 
+using-standard-output.js
+------------------------
+process.stdout.write("Hello \n \n");
 
+const questions = [
+    "What is your name?",
+    "What would you rather be doing?",
+    "What is your preferred programming language"
+];
+
+const answers = [];
+
+//We can add a default argument to this function, and delete it from ask(answer.length);
+function ask(i = 0) {
+    process.stdout.write(`\n\n\n ${questions[i]}`);
+    process.stdout.write(` > `);
+}
+
+ask();
+
+process.stdin.on("data", function(data) {
+    answers.push(data.toString().trim());
+    if (answers.length < questions.length) {
+        ask(answers.length);
+    } else {
+        process.exit();
+    }
+})
+
+process.on("exit", function() {
+    process.stdout.write("\n\n\n");
+    process.stdout.write(`Go ${answers[1]} ${answers[0]} you can finish writing ${answers[2]} later`)
+})
+
+	Remember that standard input, and standard output objects, give us some powerful tools for communication with running process. These tools are available on the process object, 
+	meaning that you can use them anywhere.
+
+==================================================================================================================================================================
 
 
 
