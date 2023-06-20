@@ -235,7 +235,11 @@ process.on("exit", function() {
 
 ==================================================================================================================================================================
 
+* Creating a delay with setTimeout
+----------------------------------
+	Another way to work asynchronously is using timing functions.
 
+	
 
 
 
