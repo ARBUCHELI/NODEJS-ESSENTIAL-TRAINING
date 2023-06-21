@@ -17,6 +17,97 @@
 
 * Collecting information with readline
 --------------------------------------
+	readline is a module that allows us to ask questions of our terminal user.
+
+readline-example.js
+-------------------
+const readline = require("readline");
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+rl.question("How do you like Node?  ", answer => {
+    console.log(`Your answer: ${answer}`);
+});
+
+	At this moment, we are answering our own question. In the next lesson we are going to improve this a little bit.
+
+===================================================================================================================================================================
+
+* Using readline
+----------------
+	Here we are studying some common patterns that we constantly use in Node.js:
+		. We constantly send functions to other functions as arguments (for example in done function).
+
+using-readline.js
+-----------------
+const readline = require("readline");
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+const questions = [
+    "What is your name?  ",
+    "Where do you live?  ",
+    "What are you going to do with Node.js? "
+]
+//The done callback is going to fire, when we are done asquing questions
+function collectAnswers(questions, done) {
+    const answers = [];
+
+    const questionAnswered = answer => {
+        answers.push(answer.trim());
+        if (answers.length < questions.length) {
+            rl.question(
+                questions[answers.length], 
+                questionAnswered
+            );
+        } else {
+            return done(answers);
+        }
+    };
+    rl.question(questions[0], questionAnswered);
+}
+
+collectAnswers(questions, (answers) => {
+    console.log("Thank you for your answers!");
+    console.log(answers);
+    process.exit();
+})
+
+
+
+==================================================================================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
