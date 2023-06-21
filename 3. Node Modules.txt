@@ -3,4 +3,19 @@
 
 * Understanding core modules
 ----------------------------
-	
+	Remember that one of the global available functions is the require function. This is what we use to load modules.
+
+	The path module is one example that a module that comes with Node.js
+
+	We can also use this module to create path strings. The path.join function can be used to join them together.
+
+	There is also a utile module. utile has also a log method.
+
+	There is also a module called v8. This is used to get information about how much memory, the app is using.
+
+
+
+
+
+
+
