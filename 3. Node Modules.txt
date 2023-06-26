@@ -81,6 +81,87 @@ collectAnswers(questions, (answers) => {
 
 ==================================================================================================================================================================
 
+* Exporting custom modules
+--------------------------
+	- Every JavaScript file is a module. We've been loading modules with the require function, but we need to export the modules too.
+
+	- We can break our code up into separate files called modules.  Modules make our code reusable and consumable, because we can publish our modules with npm and share them with
+	the rest of the community.
+
+myModule.js
+-----------
+let count = 0;
+
+const inc = () => ++count;
+const dec = () => --count;
+
+const getCount = () => count;
+
+module.exports = {
+    anything: true,
+    who: "Bill",
+    count,
+    inc,
+    dec,
+    getCount
+};
+
+app.js
+------
+//const myModule = require("./myModule");
+const { inc, dec, getCount } = require("./myModule");
+
+inc();
+inc();
+inc();
+
+//console.log(myModule.anything);
+//console.log(myModule.inc());
+
+console.log(`the count is ${getCount()}`);
+
+==================================================================================================================================================================
+
+* Creating a module
+-------------------
+	- A useful Node.js tools is the event emitter.  The event emitter is the Node.js implementation of the pub-sub design pattern. It allow us to create listeners for
+	and emit custom events.
+
+	- The event emitter is a powerful tool that allows us to decouple logic and handle asynchronicity in JavaScript.
+
+
+eventEmitter.js
+---------------
+const events = require("events");
+
+let emitter = new events.EventEmitter();
+
+emitter.on("customEvent", (message, user) => {
+    console.log(`${user}: ${message}`);
+});
+
+emitter.emit("customEvent", "Hello World", "Computer");
+emitter.emit("customEvent", "That's pretty cool", "Andres");
+
+process.stdin.on("data", (data) => {
+    const input = data.toString().trim();
+    if(input === "exit") {
+        emitter.emit("customEvent", "Goodbye!", "process");
+        process.exit();
+    }
+    emitter.emit(
+        "customEvent",
+        data.toString().trim(),
+        "terminal"
+    );
+})
+
+==================================================================================================================================================================
+
+
+
+
+	
 
 
 
