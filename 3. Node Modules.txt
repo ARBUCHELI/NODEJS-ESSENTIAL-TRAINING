@@ -158,6 +158,10 @@ process.stdin.on("data", (data) => {
 
 ==================================================================================================================================================================
 
+* Custom events with the EventEmitter
+-------------------------------------
+	- First we are going to create a lib folder that will contain functions that we are going to use in different places.
+
 
 
 
