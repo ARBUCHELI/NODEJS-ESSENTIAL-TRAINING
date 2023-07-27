@@ -117,6 +117,111 @@ fs.writeFile("javascript.md", md.trim(), function(err) {
 
 ==================================================================================================================================================================
 
+* Creating directories
+----------------------
+	With fs we can also create directories.
+
+directory.js
+------------
+const fs = require("fs");
+
+fs.mkdir("your-files-here", function(err) {
+    if(err) {
+        console.log(`ERROR: ${err}`);
+    } else {
+        console.log('Directory created successfully!');
+    }
+})
+
+	To make sure that a directory doesn't already exits:
+
+directory.js
+------------
+const fs = require("fs");
+
+if(fs.existsSync("your-files-here")) {
+    console.log("already there!")
+} else {
+    fs.mkdir("your-files-here", function(err) {
+        if(err) {
+            console.log(`ERROR: ${err}`);
+        } else {
+            console.log('Directory created successfully!');
+        }
+    })
+}
+
+==================================================================================================================================================================
+
+* Renaming and removing files
+-----------------------------
+	We can also use fs to rename files.
+
+rename.js
+---------
+const fs = require("fs");
+
+fs.renameSync("./lib/config.js", "./lib/project-config.js");
+
+console.log("Config.js file renamed");
+
+	We can also use rename to move files.  The following is an example of an asynchronous code:
+
+rename.js
+---------
+const fs = require("fs");
+
+fs.renameSync("./lib/config.js", "./lib/project-config.js");
+
+console.log("Config.js file renamed");
+
+	Files also can be removed with fs unlink
+
+rename.js
+---------
+const fs = require("fs");
+
+//fs.renameSync("./lib/config.js", "./lib/project-config.js");
+
+//console.log("Config.js file renamed");
+
+/*fs.rename("./lib/notes.md", "./notes.md", function(err) {
+    if (err) {
+        throw err;
+    }
+    console.log("Notes markdown file moved");
+});*/
+
+fs.unlinkSync("./lib/project-config.js");
+
+	We also can asynchronously remove files and unlink will asynchronously remove our notes file.
+
+rename.js
+---------
+const fs = require("fs");
+
+//fs.renameSync("./lib/config.js", "./lib/project-config.js");
+
+//console.log("Config.js file renamed");
+
+/*fs.rename("./lib/notes.md", "./notes.md", function(err) {
+    if (err) {
+        throw err;
+    }
+    console.log("Notes markdown file moved");
+});*/
+
+//fs.unlinkSync("./lib/project-config.js");
+
+fs.unlink("notes.md", function (err) {
+    if (err) {
+        throw err;
+    }
+    console.log("Notes are gone");
+})
+
+==================================================================================================================================================================
+
 
 
 
