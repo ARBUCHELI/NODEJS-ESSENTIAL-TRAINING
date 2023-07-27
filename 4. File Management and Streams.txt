@@ -3,3 +3,97 @@
 
 * Listing directory files
 -------------------------
+	fs module is used to work with files and directories.
+
+	We use fs.readdirSync("./") to read the contents of the current directory synchronously with a blocking request. This means that I'm blocking the rest of the process until
+	the file is read.
+
+	We also can use fs.readdir() with a callback function.
+
+list.js
+-------
+const fs = require("fs");
+
+let files = fs.readdirSync("./");
+
+console.log(files);
+
+list.js
+-------
+const fs = require("fs");
+
+//let files = fs.readdirSync("./");
+fs.readdir("./", function (err, files) {
+    if (err) {
+        throw err;
+    }
+    console.log(files);
+})
+
+	We use these kinds of syntax to allow the app to do something else while the file or directory is being read.
+
+==================================================================================================================================================================
+
+* Reading files
+---------------
+	Allow us to read contents of a file, encoded into some sort of a text format.
+
+	We can do it synchronously.
+
+reading.js
+----------
+const fs = require("fs");
+
+let ipsum = fs.readFileSync("./1. What is Nodejs.txt", "UTF-8");
+
+console.log(ipsum);
+
+	Or asynchronously.
+
+reading.js
+----------
+const fs = require("fs");
+
+//let ipsum = fs.readFileSync("./1. What is Nodejs.txt", "UTF-8");
+fs.readFile("./1. What is Nodejs.txt", "UTF-8", (err, ipsum) => {
+    console.log(ipsum);
+})
+
+console.log("reading the file...");
+
+===================================================================================================================================================================
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
