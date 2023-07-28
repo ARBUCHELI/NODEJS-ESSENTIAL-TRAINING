@@ -381,7 +381,13 @@ console.log("Reading the file");
 
 * Writable file Streams
 -----------------------
-	
+	The writable is used to write the data chunks data are being read by the readable streams. Let's improve our ask questions app (In my case the name of this app is 
+	using-standard-output.js).
+
+
+using-standard-output.js
+------------------------
+
 
 
 
