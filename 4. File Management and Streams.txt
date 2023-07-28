@@ -222,6 +222,180 @@ fs.unlink("notes.md", function (err) {
 
 ==================================================================================================================================================================
 
+* Renaming and removing directories
+-----------------------------------
+	
+directories.js
+--------------
+const fs = require("fs");
+
+fs.renameSync("./assets/logs", "accounts/logs");
+
+console.log("logs folder moved")
+
+	We can also remove directories
+
+
+directories.js
+--------------
+fs.rmdir("./assets", function(err) {
+    if(err) {
+        console.log(err)
+    } else {
+        console.log("./accounts directory removed");
+    }
+});
+
+	If we want to remove a directory, we need to get rid that everything that is inside of the directory.
+	We need to implement this functionality using a forEach loop.
+
+
+directories.js
+--------------
+const fs = require("fs");
+
+//fs.renameSync("./assets/logs", "accounts/logs");
+
+//console.log("logs folder moved")
+
+/*fs.rmdir("./assets", function(err) {
+    if(err) {
+        console.log(err)
+    } else {
+        console.log("./accounts directory removed");
+    }
+});*/
+
+fs.readdirSync("./accounts").forEach((file) => {
+    fs.renameSync(`./accounts/${file}`, `./library/${file}`);
+});
+
+console.log("Files Removed");
+fs.rmdirSync("./accounts");
+console.log("Folder Removed");
+
+==================================================================================================================================================================
+
+* Readable file streams
+-----------------------
+	Streams in Node.js give us a way to asynchronously handle continuous data flows.
+
+	Understanding how streams work can dramatically improve the way our applications handle large data.
+
+	We've been using already streams, because process.stdout and process.stdin implement the stream interface.
+
+	Remember the following code:
+
+using-standard-output.js
+------------------------
+process.stdout.write("Hello \n \n");
+
+const questions = [
+    "What is your name?",
+    "What would you rather be doing?",
+    "What is your preferred programming language"
+];
+
+const answers = [];
+
+//We can add a default argument to this function, and delete it from ask(answer.length);
+function ask(i = 0) {
+    process.stdout.write(`\n\n\n ${questions[i]}`);
+    process.stdout.write(` > `);
+}
+
+ask();
+
+process.stdin.on("data", function(data) {
+    answers.push(data.toString().trim());
+    if (answers.length < questions.length) {
+        ask(answers.length);
+    } else {
+        process.exit();
+    }
+})
+
+process.on("exit", function() {
+    process.stdout.write("\n\n\n");
+    process.stdout.write(`Go ${answers[1]} ${answers[0]} you can finish writing ${answers[2]} later`)
+})
+
+	Let's consider how working with file streams my allow to improve our applications.
+
+	The problem with the following code is that Node waits until the entire file is read, before calling the callback function.
+
+streams.js
+----------
+const fs = require("fs");
+
+fs.readFile(
+    "./chat-logs/george-ben-chat.log", 
+    "UTF-8", 
+    (err, chatLog) => {
+        console.log(`File Read ${chatLog.length}`);
+    }
+);
+
+console.log("Reading the file");
+
+	We can implement a better solution with a readable stream:
+
+	Insted of reading an entire file at once, a stream breaks the file down into bits or into different chunks.
+
+	Readable streams raise data events and pass small chuncks of data to a callback.
+
+	Using streams means that we don't have to wait for the entire file to finish loading, before we start reading the video. (Streaming video is a clear example of this).
+
+	We break the video into chunks.
+
+streams.js
+----------
+const fs = require("fs");
+
+let stream = fs.createReadStream(
+    "./chat-logs/george-ben-chat.log",
+    "UTF-8"
+);
+
+let data;
+
+stream.once("data", (chunk) => {
+    console.log("read stream started");
+    console.log("==========");
+    console.log(chunk);
+});
+
+stream.on("data", (chunk) => {
+    console.log(`chunk: ${chunk.length}`);
+    data += chunk;
+})
+
+stream.on("end", () => {
+    console.log(`finished ${data.length}`);
+})
+
+console.log("Reading the file");
+
+
+==================================================================================================================================================================
+
+* Writable file Streams
+-----------------------
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
